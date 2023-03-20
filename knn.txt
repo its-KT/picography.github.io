@@ -1,0 +1,50 @@
+Find s algorithm
+
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv("find_s.csv")
+
+concepts=np.array(data)[:,:-1]
+target=np.array(data)[:,-1]
+
+specific_h = []
+
+for i, val in enumerate(target):
+    if val == 'yes':
+        specific_h = concepts[i].copy()
+        break
+
+for i, val in enumerate(concepts):
+    if target[i] == 'yes':
+        for x in range(len(specific_h)):
+            if val[x] != specific_h[x]:
+                specific_h[x] = '?'
+            else:
+                pass
+
+print(specific_h)
+
+---------------------------------------------------
+
+KNN 
+
+from sklearn.neighbors import KNeighbors Classifier
+from sklearn.model_selection import train_test_split
+ from sklearn.datasets import load_iris
+
+irisData = load_iris()
+X = irisData.data
+y = irisData.target
+
+X_train, X_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state=42)
+knn=KNeighborsClassifier(n_neighbors=7)
+knn.fit(X_train, y_train)
+
+print (knn.predict(X_test)) print(knn.score (X_test, y_test))
+
+
+
+[1 0 2 1 1 0 1 2 2 1 2 0 0 0 0 1 2 1 1 2 0 2 0 2 2 2 2 2 0 0]
+
+0.9666666666666667
